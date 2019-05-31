@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyCQG4G_sg6eAmvIJJsGNeu892vkxJ6kgWk",
+    authDomain: "funmaps-c9231.firebaseapp.com",
+    databaseURL: "https://funmaps-c9231.firebaseio.com",
+    projectId: "funmaps-c9231",
+    storageBucket: "funmaps-c9231.appspot.com",
+    messagingSenderId: "299693514612",
+    appId: "1:299693514612:web:2a05ba69acac7d91"
+  }
 };
 
 /*
