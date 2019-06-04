@@ -37,7 +37,7 @@ export class Tab1Page {
           lat: 21.382314,
           lng: -157.933097
         },
-        zoom: 10
+        zoom: 15
       }
     });
     this.addCluster(this.dummyData());
