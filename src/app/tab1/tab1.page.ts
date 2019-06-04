@@ -32,12 +32,12 @@ export class Tab1Page {
 
   loadMap() {
     this.map = GoogleMaps.create('map_canvas', {
-      'camera': {
-        'target': {
-          "lat": 21.382314,
-          "lng": -157.933097
+      camera: {
+        target: {
+          lat: 21.382314,
+          lng: -157.933097
         },
-        'zoom': 10
+        zoom: 10
       }
     });
     this.addCluster(this.dummyData());
@@ -50,14 +50,14 @@ export class Tab1Page {
         {
           min: 3,
           max: 9,
-          url: "",
+          url: "assets/small.png",
           label: {
             color: "white"
           }
         },
         {
           min: 10,
-          url: "",
+          url: "assets/large.png",
           label: {
             color: "white"
           }
@@ -83,7 +83,7 @@ export class Tab1Page {
         },
         "name": "Starbucks - HI - Aiea  03641",
         "address": "Aiea Shopping Center_99-115\nAiea Heights Drive #125_Aiea, Hawaii 96701",
-        "icon": "assets/markercluster/marker.png"
+        "icon": "assets/marker.png"
       }
     ]
   }
