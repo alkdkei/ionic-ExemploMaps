@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'addLoja',
+        children: [
+          {
+            path: '',
+            loadChildren: '../loja/add-loja/add-loja.module#AddLojaPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
