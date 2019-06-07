@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LojaService } from '../loja/loja.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  private lojas$:any;
+  
+  constructor(
+    private lojaService:LojaService
+  ) {
+    this.lojas$ = this.lojaService.getAll();
+  }
 
 }

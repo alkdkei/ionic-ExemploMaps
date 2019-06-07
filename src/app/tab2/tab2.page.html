@@ -9,9 +9,15 @@
 <ion-content>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button color="danger">
       <ion-icon name="add" [routerLink]="[ '/tabs/addLoja' ]"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <ion-list *ngIf="lojas$ |async as lojas">
+    <ion-item *ngFor="let loja of lojas">
+      <ion-text>{{loja.nome}} - {{loja.key}}</ion-text>
+    </ion-item>
+  </ion-list>
+  
 </ion-content>
