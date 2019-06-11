@@ -3,7 +3,6 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Loja } from './loja';
 import { map } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root'
 })

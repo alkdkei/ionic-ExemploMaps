@@ -4,6 +4,19 @@ import { AlertController } from '@ionic/angular';
 import { LojaService } from '../loja.service';
 import { Loja } from '../loja';
 
+//GoogleMaps
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  MarkerCluster
+} from '@ionic-native/google-maps';
+
+//Importar suporte para plataforma
+import { Platform } from '@ionic/angular';
+
+
 @Component({
   selector: 'app-add-loja',
   templateUrl: './add-loja.page.html',
@@ -11,15 +24,19 @@ import { Loja } from '../loja';
 })
 export class AddLojaPage implements OnInit {
 
+  private map: GoogleMap;
   private loja: Loja;
 
   constructor(
     private lojaService: LojaService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private platform: Platform
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loja = new Loja;
+    await this.platform.ready();
+    await this.loadMap();
   }
 
   onSubmit(form) {
@@ -42,6 +59,7 @@ export class AddLojaPage implements OnInit {
       )
   }
 
+
   //Alerts -------------------------------
   async presentAlert(titulo: string, texto: string) {
     const alert = await this.alertController.create({
@@ -52,4 +70,19 @@ export class AddLojaPage implements OnInit {
     });
     await alert.present();
   }
+
+
+  //Googlemaps -----------------------------
+  loadMap() {
+    this.map = GoogleMaps.create('map_canvas', {
+      camera: {
+        target: {
+          lat: 21.382314,
+          lng: -157.933097
+        },
+        zoom: 15
+      }
+    });
+  }
+
 }
