@@ -3,6 +3,6 @@ export class Loja {
     nome: string;
     endereco: string;
     tel: string;
-    lat: string;
-    lng: string;
+    lat: number;
+    lng: number;
 }
