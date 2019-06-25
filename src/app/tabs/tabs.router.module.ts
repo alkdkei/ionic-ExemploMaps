@@ -17,7 +17,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'listalojas',
+        path: 'listaLojas',
         children: [
           {
             path: '',
@@ -39,20 +39,20 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../loja/add-loja/add-loja.module#AddLojaPageModule'
+            loadChildren: '../pages/add-loja/add-loja.module#AddLojaPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/mapaLojas',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/mapaLojas',
     pathMatch: 'full'
   }
 ];

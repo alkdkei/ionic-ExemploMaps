@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
-import { LojaService } from '../loja.service';
-import { Loja } from '../loja';
+import { LojaService } from 'src/app/services/loja.service';
+import { Loja } from 'src/app/model/loja';
 
 //GoogleMaps
 import {
@@ -16,7 +16,6 @@ import {
 
 //Importar suporte para plataforma
 import { Platform } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-add-loja',
