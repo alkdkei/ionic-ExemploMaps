@@ -102,7 +102,7 @@ export class AddLojaPage implements OnInit {
             icon: '#dd0000',
             animation: 'bouce',
             zoom: 18,
-            draggable: true,
+            draggable: false,
             position: location.latLng
           })
           this.loja.lat = location.latLng.lat;
@@ -114,8 +114,18 @@ export class AddLojaPage implements OnInit {
   addPonto() {
     this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(
       res => {
-        console.log(res);
-        this.marker.setPosition(res.latLng)
+        this.marker.setPosition(res[0]);
+        this.loja.lat = res[0].lat;
+        this.loja.lng = res[0].lng;
+        console.log(this.loja);
+
+      }
+    )
+    this.marker.on(GoogleMapsEvent.MAP_DRAG).subscribe(
+      res => {
+        this.loja.lat = this.marker.getPosition().lat;
+        this.loja.lng = this.marker.getPosition().lng;
+        console.log(this.loja);
       }
     )
   }
