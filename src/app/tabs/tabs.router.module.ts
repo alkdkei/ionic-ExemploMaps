@@ -8,29 +8,29 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'mapaLojas',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../pages/mapa-loja/mapa-loja.module#MapaLojaPageModule'
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'listalojas',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../pages/list-loja/list-loja.module#ListLojaPageModule'
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'usuario',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../pages/list-usuario/list-usuario.module#ListUsuarioPageModule'
           }
         ]
       },

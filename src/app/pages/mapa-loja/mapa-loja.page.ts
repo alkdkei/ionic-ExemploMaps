@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 //GoogleMaps
 import {
@@ -13,11 +13,11 @@ import {
 import { Platform } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-mapa-loja',
+  templateUrl: './mapa-loja.page.html',
+  styleUrls: ['./mapa-loja.page.scss'],
 })
-export class Tab1Page {
+export class MapaLojaPage implements OnInit {
 
   map: GoogleMap;
 
@@ -65,6 +65,8 @@ export class Tab1Page {
       ]
     });
 
+    markerCluster.off();
+    
     markerCluster.on(GoogleMapsEvent.MARKER_CLICK).subscribe((params) => {
       let marker: Marker = params[1];
       marker.setTitle(marker.get("name"));

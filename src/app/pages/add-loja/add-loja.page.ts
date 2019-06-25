@@ -10,7 +10,8 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   Marker,
-  MyLocation
+  MyLocation,
+  MarkerCluster
 } from '@ionic-native/google-maps';
 
 //Importar suporte para plataforma
@@ -26,6 +27,7 @@ export class AddLojaPage implements OnInit {
 
   private map: GoogleMap;
   private loja: Loja;
+  private marker: Marker;
 
   constructor(
     private lojaService: LojaService,
@@ -80,32 +82,46 @@ export class AddLojaPage implements OnInit {
           lat: 21.382314,
           lng: -157.933097
         },
+
         zoom: 15
       }
     });
     this.localAtual();
   }
 
-  localAtual(){
-    this.map.clear;
+  localAtual() {
     this.map.getMyLocation()
       .then(
         (location: MyLocation) => {
           this.map.animateCamera({
             target: location.latLng,
-           // zoom: 18,
+            // zoom: 18,
           });
-          this.map.addMarker({
+          this.marker = this.map.addMarkerSync({
             title: this.loja.nome,
             snippet: this.loja.endereco,
             icon: '#dd0000',
             animation: 'bouce',
             zoom: 18,
+            draggable: true,
             position: location.latLng
           })
           this.loja.lat = location.latLng.lat;
           this.loja.lng = location.latLng.lng;
-        })
-  
+        });
+
   }
+
+  addPonto() {
+    this.map.on(GoogleMapsEvent.MAP_CLICK).subscribe(
+      res => {
+        console.log(res);
+        this.marker.setPosition(res.latLng)
+      }
+    )
+  }
+
+
 }
+
+
