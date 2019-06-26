@@ -18,7 +18,7 @@ export class LojaService {
   }
 
   getAll() {
-    return this.bd.list("lojas").snapshotChanges()
+    return this.bd.list<Loja>("lojas").snapshotChanges()
       .pipe(
         map(changes =>
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))

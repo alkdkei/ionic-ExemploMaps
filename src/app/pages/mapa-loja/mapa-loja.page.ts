@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 //GoogleMaps
 import {
   GoogleMaps,
@@ -11,6 +12,8 @@ import {
 
 //Importar suporte para plataforma
 import { Platform } from '@ionic/angular';
+import { LojaService } from 'src/app/services/loja.service';
+import { last } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-mapa-loja',
@@ -22,7 +25,8 @@ export class MapaLojaPage implements OnInit {
   map: GoogleMap;
 
   constructor(
-    private platform: Platform
+    private platform: Platform,
+    private lojaService: LojaService
   ) { }
 
   async ngOnInit() {
@@ -66,7 +70,7 @@ export class MapaLojaPage implements OnInit {
     });
 
     markerCluster.off();
-    
+
     markerCluster.on(GoogleMapsEvent.MARKER_CLICK).subscribe((params) => {
       let marker: Marker = params[1];
       marker.setTitle(marker.get("name"));
@@ -77,17 +81,23 @@ export class MapaLojaPage implements OnInit {
   }
 
   dummyData() {
-    return [
-      {
-        "position": {
-          "lat": 21.382314,
-          "lng": -157.933097
-        },
-        "name": "Starbucks - HI - Aiea  03641",
-        "address": "Aiea Shopping Center_99-115\nAiea Heights Drive #125_Aiea, Hawaii 96701",
-        "icon": "assets/marker.png"
+    let lojas: any[];
+    this.lojaService.getAll().subscribe(
+      res => {
+        res.forEach(loja => {
+          lojas.push({
+            "position": {
+              "lat": loja.lat,
+              "lng": loja.lng
+            },
+            "name": loja.nome,
+            "address": loja.endereco,
+            "icon": "assets/marker.png"
+          })
+        });
       }
-    ]
+    )
+    return lojas;
   }
 
 }
