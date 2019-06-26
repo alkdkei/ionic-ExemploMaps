@@ -81,7 +81,7 @@ export class MapaLojaPage implements OnInit {
   }
 
   dummyData() {
-    let lojas: any[];
+    let lojas: any[]=[];
     this.lojaService.getAll().subscribe(
       res => {
         res.forEach(loja => {
