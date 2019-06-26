@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-
 //GoogleMaps
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   Marker,
-  MarkerCluster
+  MarkerCluster,
+  MyLocation
 } from '@ionic-native/google-maps';
 
 //Importar suporte para plataforma
@@ -35,15 +35,15 @@ export class MapaLojaPage implements OnInit {
   }
 
   loadMap() {
-    this.map = GoogleMaps.create('map_canvas', {
-      camera: {
-        target: {
-          lat: 21.382314,
-          lng: -157.933097
-        },
-        zoom: 15
-      }
-    });
+    this.map = GoogleMaps.create('map_canvas');
+    this.map.getMyLocation()
+      .then(
+        (location: MyLocation) => {
+          this.map.animateCamera({
+            target: location.latLng,
+            zoom: 18,
+          });
+        })
     this.addCluster(this.dummyData());
   }
 
@@ -97,6 +97,7 @@ export class MapaLojaPage implements OnInit {
         });
       }
     )
+    console.log(lojas);    
     return lojas;
   }
 
