@@ -45,13 +45,13 @@ export class MapaLojaPage implements OnInit {
             zoom: 18,
           })
 
-          // this.map.addMarkerSync({
-          //   //icon: "assets/icon/favicon.png",
-          //   //animation: 'bouce',
-          //   //zoom: 18,
-          //   draggable: false,
-          //   position: location.latLng
-          // })
+          this.map.addMarkerSync({
+            //icon: "assets/icon/favicon.png",
+            //animation: 'bouce',
+            //zoom: 18,
+            draggable: false,
+            position: location.latLng
+          })
 
           let circle: Circle = this.map.addCircleSync({
             center: location.latLng,
@@ -79,7 +79,6 @@ export class MapaLojaPage implements OnInit {
           // });
 
           this.marcalojas();
-  
         }
       )
   }
