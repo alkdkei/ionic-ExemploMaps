@@ -44,6 +44,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'loginUsuario',
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/login-usuario/login-usuario.module#LoginUsuarioPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/mapaLojas',
         pathMatch: 'full'
