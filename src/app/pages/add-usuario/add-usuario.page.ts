@@ -30,7 +30,8 @@ export class AddUsuarioPage implements OnInit {
         res => {
           this.usuario.email = null;
           this.usuario.pws = null;
-          this.usuario.uid = res.user.uid;
+          this.usuario.uid = res.user.uid
+          this.usuarioService.save(this.usuario);
           console.log("Cadastrado");
           this.presentAlert("Aviso!", "Usuário cadastrada.");
         }
