@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { Usuario } from './../../model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-usuario',
@@ -18,6 +19,7 @@ export class AddUsuarioPage implements OnInit {
     private alertController: AlertController,
     private usuarioService: UsuarioService,
     public afAuth: AngularFireAuth,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class AddUsuarioPage implements OnInit {
           this.usuarioService.save(this.usuario);
           console.log("Cadastrado");
           this.presentAlert("Aviso!", "Usuário cadastrada.");
+          this.router.navigate(['/']);
         }
         ,
         err => {
