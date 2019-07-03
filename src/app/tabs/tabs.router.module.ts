@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'addUsuario',
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/add-usuario/add-usuario.module#AddUsuarioPageModule'
+          }
+        ]
+      },
+      {
         path: 'addLoja',
         children: [
           {

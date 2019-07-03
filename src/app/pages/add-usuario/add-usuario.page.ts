@@ -1,3 +1,4 @@
+import { Usuario } from './../../model/usuario';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUsuarioPage implements OnInit {
 
+  public usuario:Usuario;
+
   constructor() { }
 
   ngOnInit() {
+    this.usuario = new Usuario
   }
 
 }

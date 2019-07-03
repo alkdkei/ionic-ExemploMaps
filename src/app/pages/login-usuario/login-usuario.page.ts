@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router/';
 import { AlertController } from '@ionic/angular';
+import { Device } from '@ionic-native/device/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
   selector: 'app-login-usuario',
@@ -17,7 +19,9 @@ export class LoginUsuarioPage implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private googlePlus: GooglePlus,
+    private device: Device
   ) { }
 
   ngOnInit() {
@@ -42,7 +46,23 @@ export class LoginUsuarioPage implements OnInit {
   }
 
   loginGoogle() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    console.log(this.device.platform);
+
+    if (this.device.platform == "browser")
+      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    else
+      this.loginGoogleMobile();
+    
+    if (this.afAuth.user){
+      this.router.navigate(['/']);
+    }
+
+  }
+
+  loginGoogleMobile() {
+    this.googlePlus.login({})
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
   }
 
   logout() {
