@@ -4,29 +4,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="afAuth.user | async as user; else showLogin" padding>
+  <ion-item lines="none">
+    <img [src]="user.photoURL" alt="">
+  </ion-item>
+  <ion-item lines="none">
+    <h1>{{user.displayName}}</h1>
+  </ion-item>
+  <ion-item lines="none">
+    {{user.email}}
+  </ion-item>
+  <ion-item lines="none">
+    {{user.uid}}
+  </ion-item>
+  <ion-button expand="block" fill="outline" routerLink="/" (click)=" logout()" margin-top>Sair</ion-button>
+</ion-content>
 
+<ng-template #showLogin>
   <ion-content padding>
     <form #fc="ngForm" (ngSubmit)="onSubmit(fc)">
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
         <ion-input type="email" name="email" [(ngModel)]="email" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
         <ion-input type="password" name="senha" [(ngModel)]="pws" required></ion-input>
       </ion-item>
-
       <ion-item lines="none" margin-top>
         <ion-button type="submit" [disabled]="fc.invalid">Entrar</ion-button>
         <ion-button href="/">Cancelar</ion-button>
         <ion-button href="/tabs/addUsuario">cadastrar-se</ion-button>
       </ion-item>
-
       <ion-button expand="block" fill="outline" (click)="loginGoogle()" margin-top>entrar com Google</ion-button>
-
-      <ion-button expand="block" fill="outline" routerLink="/" (click)=" logout()" margin-top>Sair</ion-button>
-      
+      <!-- <ion-button expand="block" fill="outline" routerLink="/" (click)=" logout()" margin-top>Sair</ion-button> -->
     </form>
   </ion-content>
+</ng-template>

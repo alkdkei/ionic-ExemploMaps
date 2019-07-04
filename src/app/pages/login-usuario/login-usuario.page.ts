@@ -25,6 +25,7 @@ export class LoginUsuarioPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.afAuth);
   }
 
   onSubmit(form) {
