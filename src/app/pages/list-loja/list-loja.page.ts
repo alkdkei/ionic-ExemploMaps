@@ -8,12 +8,12 @@ import { LojaService } from 'src/app/services/loja.service';
 })
 export class ListLojaPage implements OnInit {
   
-  private lojas$: any;
+  private lojas: any;
   
   constructor(
     private lojaService: LojaService
     ) {
-      this.lojas$ = this.lojaService.getAll();
+      this.lojas = this.lojaService.getAll();
     }
     
     

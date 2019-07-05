@@ -13,8 +13,8 @@ export class UsuarioService {
     private bd: AngularFireDatabase
   ) { }
 
-  save(usuario: Usuario) {
-    return this.bd.list("usuarios").push(usuario);
+  save(usuario: Usuario, uid:string) {
+    return this.bd.object("usuarios/" + uid).set(usuario);
   }
 
   getAll() {
@@ -24,6 +24,10 @@ export class UsuarioService {
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       )
+  }
+
+  get(uid:string){
+    return this.bd.object<Usuario>("usuarios/"+uid).snapshotChanges()
   }
 
 }
