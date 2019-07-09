@@ -24,14 +24,14 @@ import { Platform } from '@ionic/angular';
 })
 export class AddLojaPage implements OnInit {
 
-  private map: GoogleMap;
-  private loja: Loja;
-  private marker: Marker;
+  protected map: GoogleMap;
+  protected loja: Loja;
+  protected marker: Marker;
 
   constructor(
-    private lojaService: LojaService,
-    private alertController: AlertController,
-    private platform: Platform
+    protected lojaService: LojaService,
+    protected alertController: AlertController,
+    protected platform: Platform
   ) { }
 
   async ngOnInit() {

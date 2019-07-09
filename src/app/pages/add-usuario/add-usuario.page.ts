@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { Usuario } from './../../model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-usuario',
@@ -14,10 +14,11 @@ import { Router } from '@angular/router';
 export class AddUsuarioPage implements OnInit {
 
   public usuario: Usuario;
+  public conf:string;
 
   constructor(
-    private alertController: AlertController,
-    private usuarioService: UsuarioService,
+    protected alertController: AlertController,
+    protected usuarioService: UsuarioService,
     public afAuth: AngularFireAuth,
     public router: Router
   ) { }

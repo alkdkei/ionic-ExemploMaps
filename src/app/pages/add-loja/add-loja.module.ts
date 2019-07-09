@@ -17,10 +17,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AddLojaPage]
 })
-export class AddLojaPageModule {}
+export class AddLojaPageModule { }
