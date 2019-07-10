@@ -46,6 +46,7 @@ export class AddLojaPage implements OnInit {
         res => {
           console.log("Cadastrado");
           this.presentAlert("Aviso!", "Loja cadastrada.");
+          this.loja = new Loja
         }
         ,
         err => {

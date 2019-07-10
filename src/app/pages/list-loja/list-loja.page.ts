@@ -7,18 +7,17 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./list-loja.page.scss'],
 })
 export class ListLojaPage implements OnInit {
-  
-  private lojas: any;
-  
+
+  protected lojas$: any;
+
   constructor(
     private lojaService: LojaService
-    ) {
-      this.lojas = this.lojaService.getAll();
-    }
-    
-    
-      ngOnInit() {
-      }
+  ) {
+  }
+
+  ngOnInit() {
+    this.lojas$ = this.lojaService.getAll();
+  }
 
 
 }
