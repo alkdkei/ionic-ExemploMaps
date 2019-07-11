@@ -53,8 +53,8 @@ export class LoginUsuarioPage implements OnInit {
       this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
     else
       this.loginGoogleMobile();
-    
-    if (this.afAuth.user){
+
+    if (this.afAuth.user) {
       this.router.navigate(['/']);
     }
 

@@ -14,7 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class AddUsuarioPage implements OnInit {
 
   public usuario: Usuario;
-  public conf:string;
+  public conf: string;
 
   constructor(
     protected alertController: AlertController,

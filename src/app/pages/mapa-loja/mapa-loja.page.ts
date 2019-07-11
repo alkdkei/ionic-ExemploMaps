@@ -6,7 +6,6 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   Marker,
-  MarkerCluster,
   MyLocation,
   Circle
 } from '@ionic-native/google-maps';
