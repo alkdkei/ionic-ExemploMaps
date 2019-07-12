@@ -16,6 +16,7 @@ import {
 
 //Importar suporte para plataforma
 import { Platform } from '@ionic/angular';
+import { MensagensService } from 'src/app/services/mensagens.service';
 
 @Component({
   selector: 'app-add-loja',
@@ -31,7 +32,8 @@ export class AddLojaPage implements OnInit {
   constructor(
     protected lojaService: LojaService,
     protected alertController: AlertController,
-    protected platform: Platform
+    protected platform: Platform,
+    protected msg:MensagensService
   ) { }
 
   async ngOnInit() {
@@ -61,6 +63,32 @@ export class AddLojaPage implements OnInit {
       )
   }
 
+//BuscaCEP------------------------
+buscaCep(event) {
+  let cep: string = event.target.value;
+  console.log(cep);
+  if (cep.length > 7) {
+    this.msg.presentLoading();
+    this.viacepService.buscaViaCep(event)
+      .subscribe(
+        res => {
+          if (res.erro) {
+            this.usuario.endereco = new Address;
+            this.msg.dismiss();
+            this.msg.presentToast("Cep n�o encontrado!");
+          } else {
+            this.usuario.endereco = res;
+            this.msg.dismiss();
+          }
+        },
+        err => {
+          this.usuario.endereco = new Address;
+          this.msg.dismiss();
+          this.msg.presentToast("Cep invalido!")
+        }
+      )
+  }
+}
 
   //Alerts -------------------------------
   async presentAlert(titulo: string, texto: string) {

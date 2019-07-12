@@ -1,0 +1,101 @@
+//BuscaCEP------------------------
+  buscaCep(event) {
+    let cep: string = event.target.value;
+    console.log(cep);
+    if (cep.length > 7) {
+      this.msg.presentLoading();
+      this.viacepService.buscaViaCep(event)
+        .subscribe(
+          res => {
+            if (res.erro) {
+              this.usuario.endereco = new Address;
+              this.msg.dismiss();
+              this.msg.presentToast("Cep n�o encontrado!");
+            } else {
+              this.usuario.endereco = res;
+              this.msg.dismiss();
+            }
+          },
+          err => {
+            this.usuario.endereco = new Address;
+            this.msg.dismiss();
+            this.msg.presentToast("Cep invalido!")
+          }
+        )
+    }
+  }
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dados do usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item lines="none">
+    <img src="/assets/user.jpg" alt="" *ngIf="preview == null" (click)="tirarFoto()">
+    <img [src]="preview" alt="" *ngIf="preview != null" (click)="tirarFoto()">
+  </ion-item>
+
+  <form #fc="ngForm" (ngSubmit)="onSubmit(fc)">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" name="nome" [(ngModel)]="usuario.nome" #nome="ngModel" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" name="email" [(ngModel)]="usuario.email" #emial="ngModel" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">CEP</ion-label>
+      <ion-input type="text" name="cep" [(ngModel)]="usuario.endereco.cep" (keyup)="buscaCep($event)" maxlength="9"
+        required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">EndereA�o</ion-label>
+      <ion-input type="text" name="logradouro" [(ngModel)]="usuario.endereco.logradouro" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Bairro</ion-label>
+      <ion-input type="text" name="bairro" [(ngModel)]="usuario.endereco.bairro" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cidade</ion-label>
+      <ion-input type="text" name="localidade" [(ngModel)]="usuario.endereco.localidade" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-input type="text" name="uf" [(ngModel)]="usuario.endereco.uf" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" name="pws" [(ngModel)]="usuario.pws" #pws="ngModel" minlength="6" required></ion-input>
+    </ion-item>
+
+    <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">
+      <strong>Senha muito curta!</strong>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="floating">Confirma Senha</ion-label>
+      <ion-input type="password" name="conf" [(ngModel)]="conf" #c="ngModel" minlength="6" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="pws.value != c.value">
+      <strong>Senhas diferentes!</strong>
+    </ion-text>
+
+    <ion-item lines="none"></ion-item>
+
+    <ion-item lines="none">
+      <ion-button type="submit" color="primary" [disabled]="fc.invalid || (pws.value != c.value)">Salvar</ion-button>
+      <ion-button type="reset" [routerLink]="[('/tabs/tab2')]" color="primary">Cancelar</ion-button>
+    </ion-item>
+  </form>
+</ion-content>
