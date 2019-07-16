@@ -92,7 +92,7 @@ export class MapaLojaPage implements OnInit {
               lng: loja.lng
             },
             title: loja.nome,
-            snippet: loja.endereco,
+            snippet: loja.endereco.logradouro + " - " + loja.endereco.bairro + " - " + loja.endereco.localidade,
             icon: "#556677",
           })
         })

@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 
 import { LojaService } from 'src/app/services/loja.service';
 import { Loja } from 'src/app/model/loja';
+import { ViacepService } from 'src/app/services/viacep.service';
 
 //GoogleMaps
 import {
@@ -17,6 +18,7 @@ import {
 //Importar suporte para plataforma
 import { Platform } from '@ionic/angular';
 import { MensagensService } from 'src/app/services/mensagens.service';
+import { Address } from 'src/app/model/address';
 
 @Component({
   selector: 'app-add-loja',
@@ -33,11 +35,14 @@ export class AddLojaPage implements OnInit {
     protected lojaService: LojaService,
     protected alertController: AlertController,
     protected platform: Platform,
-    protected msg:MensagensService
+    protected msg: MensagensService,
+    protected viacepService: ViacepService,
+
   ) { }
 
   async ngOnInit() {
     this.loja = new Loja;
+    this.loja.endereco = new Address;
     await this.platform.ready();
     await this.loadMap();
   }
@@ -63,32 +68,32 @@ export class AddLojaPage implements OnInit {
       )
   }
 
-//BuscaCEP------------------------
-buscaCep(event) {
-  let cep: string = event.target.value;
-  console.log(cep);
-  if (cep.length > 7) {
-    this.msg.presentLoading();
-    this.viacepService.buscaViaCep(event)
-      .subscribe(
-        res => {
-          if (res.erro) {
-            this.usuario.endereco = new Address;
+  //BuscaCEP------------------------
+  buscaCep(event) {
+    let cep: string = event.target.value;
+    console.log(cep);
+    if (cep.length > 7) {
+      this.msg.presentLoading();
+      this.viacepService.buscaViaCep(event)
+        .subscribe(
+          res => {
+            if (res.erro) {
+              this.loja.endereco = new Address;
+              this.msg.dismiss();
+              this.msg.presentToast("Cep não encontrado!");
+            } else {
+              this.loja.endereco = res;
+              this.msg.dismiss();
+            }
+          },
+          err => {
+            this.loja.endereco = new Address;
             this.msg.dismiss();
-            this.msg.presentToast("Cep n�o encontrado!");
-          } else {
-            this.usuario.endereco = res;
-            this.msg.dismiss();
+            this.msg.presentToast("Cep invalido!")
           }
-        },
-        err => {
-          this.usuario.endereco = new Address;
-          this.msg.dismiss();
-          this.msg.presentToast("Cep invalido!")
-        }
-      )
+        )
+    }
   }
-}
 
   //Alerts -------------------------------
   async presentAlert(titulo: string, texto: string) {
@@ -127,7 +132,7 @@ buscaCep(event) {
           });
           this.marker = this.map.addMarkerSync({
             title: this.loja.nome,
-            snippet: this.loja.endereco,
+            snippet: this.loja.endereco.logradouro + " - " + this.loja.endereco.bairro + " - " + this.loja.endereco.localidade,
             icon: '#dd0000',
             animation: 'bouce',
             zoom: 18,
