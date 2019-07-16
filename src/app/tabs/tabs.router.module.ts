@@ -17,7 +17,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'listaLojas',
+        path: 'listLojas',
         children: [
           {
             path: '',
@@ -26,7 +26,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'usuario',
+        path: 'listUsuarios',
         children: [
           {
             path: '',
