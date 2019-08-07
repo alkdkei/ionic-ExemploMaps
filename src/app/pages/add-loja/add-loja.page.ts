@@ -5,6 +5,8 @@ import { LojaService } from 'src/app/services/loja.service';
 import { Loja } from 'src/app/model/loja';
 import { ViacepService } from 'src/app/services/viacep.service';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 //GoogleMaps
 import {
   GoogleMaps,
@@ -25,6 +27,7 @@ import { Address } from 'src/app/model/address';
   templateUrl: './add-loja.page.html',
   styleUrls: ['./add-loja.page.scss'],
 })
+
 export class AddLojaPage implements OnInit {
 
   protected map: GoogleMap;
@@ -37,6 +40,7 @@ export class AddLojaPage implements OnInit {
     protected platform: Platform,
     protected msg: MensagensService,
     protected viacepService: ViacepService,
+    private camera: Camera
 
   ) { }
 
@@ -164,6 +168,38 @@ export class AddLojaPage implements OnInit {
     )
   }
 
+  //Tirar foto da camera
+  tirarFoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.loja.fotos.push(base64Image);
+      console.log(this.loja.fotos);
+
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  removeFoto(index){
+    this.loja.fotos.splice(index, 1);
+  }
+
+
+  //Configuração slides
+  slidesOpts = {
+    slidesPerView: 3,
+    initialSlide: 1,
+    speed: 400
+  };
 
 }
 

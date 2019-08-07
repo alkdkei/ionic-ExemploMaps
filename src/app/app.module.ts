@@ -18,6 +18,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 //Google-----------------------------
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+//Camera ----------
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +34,8 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     GooglePlus,
-    Device
+    Device,
+    Camera
   ],
   bootstrap: [AppComponent]
 })

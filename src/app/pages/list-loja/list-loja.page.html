@@ -16,7 +16,7 @@
 
   <ion-list *ngIf="lojas$ | async as lojas">
     <ion-item *ngFor="let loja of lojas">
-      <ion-text>{{loja.nome}} - {{loja.key}}</ion-text>
+      <ion-text>{{loja.nome}} - {{loja.key}} - {{loja.endereco.cep}}</ion-text>
     </ion-item>
   </ion-list>
 

@@ -9,6 +9,6 @@ export class Loja {
     tel: string;
     lat: number;
     lng: number;
-    fotos: string[];
+    fotos: string[] = [];
     
 }

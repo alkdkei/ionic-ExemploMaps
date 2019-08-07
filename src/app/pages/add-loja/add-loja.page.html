@@ -5,6 +5,15 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-slides pager="true" [options]="slidesOpts" *ngIf="loja.fotos">
+        <ion-slide *ngFor="let foto of loja.fotos ; let i=index">
+          <img [src]="foto" alt="" (click)="removeFoto(i)">
+        </ion-slide>
+      </ion-slides>
+  <ion-item lines="none">
+    <ion-icon name="camera" (click)="tirarFoto()"></ion-icon>
+  </ion-item>
+
   <form #fc="ngForm" (ngSubmit)="onSubmit(fc)">
     <ion-item>
       <ion-label position="floating">Nome</ion-label>
